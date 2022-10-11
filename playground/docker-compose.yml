@@ -1,0 +1,51 @@
+version: "3"
+services:
+  ui:
+    build: photos-ui
+    ports:
+      - 3000:3000
+    depends_on:
+      - api
+
+  api:
+    build: PhotosApi
+    environment:
+      - ASPNETCORE_URLS=http://+:4000
+    ports:
+      - 4000:4000
+    depends_on:
+      - minio
+      - db
+
+  minio:
+    image: quay.io/minio/minio
+    command: server /data --console-address ":9090"
+    environment:
+      - MINIO_ROOT_USER=ROOTNAME
+      - MINIO_ROOT_PASSWORD=CHANGEME123
+    volumes:
+      - ./minio/data:/data
+    ports:
+      - 9000:9000
+      - 9090:9090
+  
+  db:
+    image: postgres:14.5-alpine
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: photos
+    volumes:
+    - ./db/data:/var/lib/postgresql/data
+    - ./db/scripts:/docker-entrypoint-initdb.d
+
+  adminer:
+    image: adminer
+    restart: always
+    depends_on: 
+      - db
+    ports:
+      - 8080:8080
