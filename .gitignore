@@ -1,5 +1,5 @@
 minio
-data
+**/db/data
 bin
 obj
 .vscode
