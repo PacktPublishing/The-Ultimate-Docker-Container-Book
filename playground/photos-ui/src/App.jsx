@@ -4,7 +4,7 @@ import SpeciesList from './components/species/SpeciesList';
 import UploadPhoto from './components/photos/UploadPhoto';
 import PhotoGallery from './components/photos/PhotosGallery';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <header className="App-header">

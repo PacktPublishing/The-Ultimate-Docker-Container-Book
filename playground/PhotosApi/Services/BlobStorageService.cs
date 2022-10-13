@@ -1,15 +1,22 @@
 using System.Reflection;
-using Microsoft.AspNetCore.Mvc;
 using Minio;
 using PhotosApi.Models;
 
 public class BlobStorageService
 {
-  private static MinioClient minio = new MinioClient()
-    .WithEndpoint("localhost:9000")
-    .WithCredentials("ROOTNAME", "CHANGEME123")
-    //.WithSSL()
-    .Build();
+  private readonly string endpoint;
+  private readonly MinioClient minio;
+
+  public BlobStorageService()
+  {
+    endpoint = Environment.GetEnvironmentVariable("MINIO_ENDPOINT") ?? "localhost:9000";
+    System.Console.WriteLine($"Minio endpoint: {endpoint}");
+    minio = new MinioClient()
+      .WithEndpoint(endpoint)
+      .WithCredentials("ROOTNAME", "CHANGEME123")
+      //.WithSSL()
+      .Build();
+  }
 
   public async Task<IEnumerable<string>> ListBucketsAsync()
   {

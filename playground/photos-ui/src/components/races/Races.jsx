@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import api from '../../services/api';
 
 function Races() {
   const [error, setError] = useState(null);
@@ -6,7 +7,7 @@ function Races() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/races")
+    api.getRaces()
       .then(res => res.json())
       .then(
         (result) => {

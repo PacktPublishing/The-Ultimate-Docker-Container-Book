@@ -37,7 +37,9 @@ function PhotoGallery() {
         <div className='container'>
           {items.map(item => (
             <div className='item' key={item.id}>
-              <div><img src={`http://localhost:9000/${item.url}`} title={item.url}/></div>
+              <div>
+                <img src={`http://localhost:9000/${item.url}`} title={item.url} alt=""/>
+              </div>
               <div>
                 <div><em>Title:</em> {item.title}</div> 
                 <div><em>Description:</em> {item.description}</div>

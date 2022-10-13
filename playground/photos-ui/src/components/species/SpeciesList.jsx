@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import api from '../../services/api';
 
 function SpeciesList() {
   const [error, setError] = useState(null);
@@ -6,7 +7,7 @@ function SpeciesList() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/species")
+    api.getSpecies()
       .then(res => res.json())
       .then(
         (result) => {
