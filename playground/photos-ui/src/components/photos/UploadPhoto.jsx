@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import api from "../../services/api";
 
-export default function UploadPhoto() {
+const UploadPhoto = () => {
   const [photo, setPhoto] = useState({});
   const [id, setId] = useState(null);
   const [title, setTitle] = useState("");
@@ -40,20 +40,27 @@ export default function UploadPhoto() {
     console.log(photo.pictureAsFile);
     const res = await api.postPhoto(formData);
     console.log(res);
+    if(res.status === 200){
+      setPhoto({});
+      setId(null);
+      setTitle("");
+      setDescription(null);
+      document.getElementById('file-picker').value = '';
+    }
   };
 
   return (
     <>
       <h2>Upload Photo</h2>
-      <input type="file" accept="image/*" onChange={onImageChange}/>
+      <input id="file-picker" type="file" accept="image/*" onChange={onImageChange}/>
       <div>
         { 
           (photo.picturePreview) && 
             <>
             <img src={ photo.picturePreview } alt=""/>
-            <div>ID: <span>{id}</span></div>
-            <div>Title: <input type="text" title="Title of photo" value={title} onChange={onTitleChanged}/></div>
-            <div>Description: <textarea title="Description" value={description} onChange={onDescriptionChanged}/></div>
+            <div>ID: <span >{id}</span></div>
+            <div>Title: <input type="text" placeholder="Title of photo" value={title} onChange={onTitleChanged}/></div>
+            <div>Description: <textarea placeholder="Description" value={description} onChange={onDescriptionChanged}/></div>
             <button onClick={postPhoto}>Upload</button>
             </>
         }
@@ -61,3 +68,5 @@ export default function UploadPhoto() {
     </>
   )
 }
+
+export default UploadPhoto;

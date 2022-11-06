@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 
-const SpeciesList = () => {
+const RacesList = () => {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    api.getSpecies()
+    api.getRaces()
       .then(res => res.json())
       .then(
         (result) => {
@@ -28,11 +28,12 @@ const SpeciesList = () => {
   } else {
     return (
       <div className='grid-item'>
-        <h2>Species</h2>
+        <h2>Races</h2>
         <table>
           <thead>
             <tr>
               <th>ID</th>
+              <th>Species</th>
               <th>Name</th>
               <th>Description</th>
             </tr>
@@ -41,6 +42,7 @@ const SpeciesList = () => {
             {items.map(item => (
               <tr key={item.id}>
                 <td>{item.id}</td>
+                <td>{item.speciesId}</td>
                 <td>{item.name}</td>
                 <td>{item.description}</td>
               </tr>
@@ -52,4 +54,4 @@ const SpeciesList = () => {
   }
 }
 
-export default SpeciesList;
+export default RacesList;
