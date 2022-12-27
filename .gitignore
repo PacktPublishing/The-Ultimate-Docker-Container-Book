@@ -1,5 +1,12 @@
+backup
 minio
 **/db/data
 bin
 obj
 .vscode
+**/DS_Store
+.DS_Store
+target
+.vagrant
+node_modules
+.mvn

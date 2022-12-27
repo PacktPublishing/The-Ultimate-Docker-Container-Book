@@ -1,0 +1,9 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0
+RUN apt-get update && apt-get install -y unzip && \ 
+    curl -sSL https://aka.ms/getvsdbgsh | \ 
+    /bin/sh /dev/stdin -v latest -l ~/vsdbg 
+WORKDIR /app
+COPY csharp-sample.csproj ./
+RUN dotnet restore
+COPY . .
+CMD dotnet watch run --urls "http://0.0.0.0:5000"

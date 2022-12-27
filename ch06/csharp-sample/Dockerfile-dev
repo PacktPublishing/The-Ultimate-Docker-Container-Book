@@ -1,0 +1,6 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0
+WORKDIR /app
+COPY csharp-sample.csproj ./
+RUN dotnet restore
+COPY . .
+CMD dotnet watch run --urls "http://0.0.0.0:5000"

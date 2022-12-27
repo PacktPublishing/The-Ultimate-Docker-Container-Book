@@ -1,0 +1,9 @@
+version: "3"
+services:
+  zipkin:
+    container_name: zipkin
+    image: openzipkin/zipkin:latest
+    extra_hosts: ['host.docker.internal:host-gateway']
+    restart: always
+    ports:
+      - 9411:9411

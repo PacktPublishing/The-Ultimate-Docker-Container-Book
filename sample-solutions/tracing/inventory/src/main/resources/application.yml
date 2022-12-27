@@ -1,0 +1,53 @@
+server:
+  port: 8090
+
+spring:
+  mvc:
+    problemdetails:
+      enabled: true
+
+  datasource:
+    name: inventory
+    generate-unique-name: false
+  h2:
+    console:
+      enabled: true
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  # Trace every action
+  tracing:
+    sampling:
+      probability: 1.0
+
+jdbc:
+  datasource-proxy:
+    # enable and configure query logging
+    query:
+      # Enable logging all queries to the log.
+      enable-logging: true
+      # Severity of query logger.
+      log-level: DEBUG
+      # Name of query logger.
+      logger-name: datasource-query-logger
+    # Logging to use for logging queries.
+    logging: slf4j
+    # Use multiline output for logging query.
+    multiline: false
+    # How to Include the Bind Parameter Values in Spans
+    include-parameter-values: false
+    # Use json output for logging query.
+    json-format: false
+  # Specify jdbc.includes property. By default, the property is set to include(observe) all(CONNECTION, QUERY, FETCH) types.
+  includes: connection,fetch,query
+
+logging:
+  level:
+    datasource-query-logger: INFO
+    org.springframework.data: DEBUG

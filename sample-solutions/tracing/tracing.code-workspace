@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "api"
+		},
+		{
+			"name": "inventory",
+			"path": "inventory"
+		}
+	],
+	"settings": {
+		"java.compile.nullAnalysis.mode": "automatic",
+		"java.configuration.updateBuildConfiguration": "automatic",
+		"maven.view": "flat"
+	}
+}
