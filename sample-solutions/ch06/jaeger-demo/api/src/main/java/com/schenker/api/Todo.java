@@ -6,16 +6,6 @@ public class Todo {
     private String title;
     private boolean completed;
 
-    @Override
-    public String toString() {
-        return "Todo{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", title='" + title + '\'' +
-                ", completed=" + completed +
-                '}';
-    }
-
     public int getUserId() {
         return userId;
     }
