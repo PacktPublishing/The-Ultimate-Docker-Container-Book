@@ -9,6 +9,5 @@ obj
 target
 .vagrant
 node_modules
-.mvn
 .m2
 .idea

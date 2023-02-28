@@ -24,4 +24,4 @@ With these minimal additions to a standard Java project, we already have a good 
     ./mvnw spring-boot:run
     ````
 
-4. Open a new browser and navigate to port xxxxx to find yourself on the Jaeger dashboard
+4. Open a new browser and navigate to port http://localhost:16686 to find yourself on the Jaeger dashboard
