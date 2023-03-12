@@ -1,0 +1,18 @@
+http:
+  routers:
+    to-catalog:
+      rule: "Host('acme.com') && PathPrefix('/catalog')"
+      service: catalog
+    to-monolith:
+      rule: "Host('acme.com')"
+      service: monolith
+
+services:
+  catalog:
+    loadBalancer:
+      servers:
+      - url: http://catalog:3000/api
+  monolith:
+    loadBalancer:
+      servers:
+      -url: http://eshop:5000

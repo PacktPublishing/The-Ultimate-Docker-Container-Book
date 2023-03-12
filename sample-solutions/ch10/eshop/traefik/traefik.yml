@@ -1,0 +1,12 @@
+## traefik.yml
+
+# Docker configuration backend
+providers:
+  # docker:
+  #   defaultRule: "Host(`{{ trimPrefix `/` .Name }}.docker.localhost`)"
+  file:
+    filename: dynamic_conf.yml
+
+# API and dashboard configuration
+api:
+  insecure: true
