@@ -1,0 +1,39 @@
+version: "3.8" 
+services: 
+  db:
+    image: postgres:alpine
+    ports:
+    - 5433:5432
+    environment:
+    - POSTGRES_USER=dockeruser
+    - POSTGRES_PASSWORD=dockerpass
+    - POSTGRES_DB=pets
+    volumes:
+    - pgdata:/var/lib/postgresql/data
+    - ./db:/docker-entrypoint-initdb.d
+
+  web: 
+    build: web 
+    image: gnschenker/ch11-web:1.0 
+    ports: 
+    - 80:3000 
+    depends_on:
+    - db
+    environment:
+    - DB_HOST=db
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: test@acme.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+volumes: 
+  pgdata:
+  pgadmin-data:
