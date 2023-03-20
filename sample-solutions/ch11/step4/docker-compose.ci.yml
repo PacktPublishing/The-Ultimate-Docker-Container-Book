@@ -1,0 +1,20 @@
+version: "3.8" 
+services: 
+  db: 
+    environment:
+    - POSTGRES_USER=dockeruser
+    - POSTGRES_PASSWORD=dockerpass
+    - POSTGRES_DB=pets
+
+  pgadmin:
+    ports:
+    - 8080:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ci-admin@acme.com
+      PGADMIN_DEFAULT_PASSWORD: ci-admin
+  
+  web: 
+    ports: 
+    - 80:3000 
+    environment:
+    - DB_HOST=db

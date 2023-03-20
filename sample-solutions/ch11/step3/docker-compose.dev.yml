@@ -1,18 +1,39 @@
 version: "3.8" 
 services: 
-  web: 
+  db:
+    image: postgres:alpine
+    ports:
+    - 5432:5432
+    environment:
+    - POSTGRES_USER=dockeruser
+    - POSTGRES_PASSWORD=dockerpass
+    - POSTGRES_DB=pets
+    volumes:
+    - pg-data:/var/lib/postgresql/data
+    - ./db:/docker-entrypoint-initdb.d
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - 5050:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@acme.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+  web:
+    image: gnschenker/ch11-web:1.0
     build: 
       context: web
       dockerfile: Dockerfile.dev
-    image: fundamentalsofdocker/ch11-web:2.0 
-    ports: 
-    - 80:3000 
-  
-  db: 
-    build: db 
-    image: fundamentalsofdocker/ch1-db:2.0 
-    volumes: 
-    - pets-data:/var/lib/postgresql/data 
+    ports:
+    - 3000
+    environment:
+    - DB_HOST=db
+    depends_on:
+    - db
 
 volumes: 
-  pets-data:
+  pg-data:
+  pgadmin-data:
