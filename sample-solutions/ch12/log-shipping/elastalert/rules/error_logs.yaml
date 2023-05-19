@@ -1,0 +1,16 @@
+name: Error Logs
+index: logstash-*
+type: frequency
+num_events: 1
+timeframe:
+  minutes: 1
+
+filter:
+- term:
+    tags: "error"
+
+alert:
+- "email"
+
+email:
+- "gnschenker@gmail.com"

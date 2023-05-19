@@ -1,0 +1,12 @@
+es_host: elasticsearch
+es_port: 9200
+
+rules_folder: rules
+run_every:
+  minutes: 1
+
+buffer_time:
+  minutes: 15
+
+alert_time_limit:
+  days: 2
