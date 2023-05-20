@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  web:
+    image: fundamentalsofdocker/ch11-web:2.0
+    ports:
+      - 3000:3000
+  db:
+    image: fundamentalsofdocker/ch11-db:2.0
+    volumes:
+      - pets-data:/var/lib/postgresql/data
+
+volumes:
+  pets-data:
