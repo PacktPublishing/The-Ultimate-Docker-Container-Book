@@ -1,0 +1,16 @@
+{
+    "name": "pets",
+    "version": "2.0.0",
+    "description": "UI for Pets App",
+    "main": "src/server.js",
+    "author": "Gabriel Schenker",
+    "license": "ISC",
+    "scripts": {
+        "start": "node src/server.js"
+    },
+    "dependencies": {
+        "express": "^4.17.1",
+        "mustache-express": "^1.3.0",
+        "pg": "^7.12.1"
+    }
+}

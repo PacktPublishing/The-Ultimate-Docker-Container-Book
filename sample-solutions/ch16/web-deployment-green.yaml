@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pets
+    service: web
+    color: green
+  name: web-green
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: pets
+      service: web
+      color: green
+  template:
+    metadata:
+      labels:
+        app: pets
+        service: web
+        color: green
+    spec:
+      containers:
+        - image: demo/ch16-web:2.1
+          name: web
+          ports:
+            - containerPort: 3000

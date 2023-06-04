@@ -1,0 +1,10 @@
+version: "2.4"
+services:
+    probe-demo:
+        image: demo/probes-demo:2.0
+        build: .
+        healthcheck:
+            test: cat /app/healthy
+            start_period: 5s
+            interval: 3s
+            retries: 2

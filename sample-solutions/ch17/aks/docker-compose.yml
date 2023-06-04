@@ -1,0 +1,10 @@
+version: "2.4" 
+services: 
+  az: 
+    image: fundamentalsofdocker/azure-cli 
+    build: . 
+    command: tail -F anything 
+    working_dir: /app 
+    volumes: 
+    - /var/run/docker.sock:/var/run/docker.sock 
+    - .:/app 

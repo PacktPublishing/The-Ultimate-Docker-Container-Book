@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pets
+    service: web
+    color: blue
+  name: web-blue
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: pets
+      service: web
+      color: blue
+  template:
+    metadata:
+      labels:
+        app: pets
+        service: web
+        color: blue
+    spec:
+      containers:
+        - image: fundamentalsofdocker/ch11-web:2.0
+          name: web
+          ports:
+            - containerPort: 3000

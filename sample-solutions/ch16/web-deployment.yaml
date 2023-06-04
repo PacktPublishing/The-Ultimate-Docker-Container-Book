@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pets
+    service: web
+  name: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pets
+      service: web
+  template:
+    metadata:
+      labels:
+        app: pets
+        service: web
+    spec:
+      containers:
+        - image: fundamentalsofdocker/ch11-web:2.0
+          name: web
+          ports:
+            - containerPort: 3000

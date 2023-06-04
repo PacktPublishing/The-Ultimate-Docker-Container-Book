@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: probes-demo
+spec:
+  containers:
+  - name: probes-demo
+    image: demo/probes-demo:2.0
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /app/healthy
+      initialDelaySeconds: 5
+      periodSeconds: 5
