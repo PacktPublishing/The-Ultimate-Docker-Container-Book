@@ -1,0 +1,47 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: prometheus-deployment 
+  labels: 
+    app: prometheus 
+    purpose: monitoring-demo 
+spec: 
+  replicas: 2 
+  selector: 
+    matchLabels: 
+      app: prometheus 
+      purpose: monitoring-demo 
+  template: 
+    metadata: 
+      labels: 
+        app: prometheus 
+        purpose: monitoring-demo 
+    spec: 
+      containers: 
+      - name: prometheus 
+        image: prom/prometheus 
+        volumeMounts: 
+        - name: config-volume 
+          mountPath: /etc/prometheus/prometheus.yml 
+          subPath: prometheus.yml 
+        ports: 
+        - containerPort: 9090 
+      volumes: 
+      - name: config-volume 
+        configMap: 
+          name: prometheus-cm 
+--- 
+kind: Service 
+apiVersion: v1 
+metadata: 
+  name: prometheus-svc 
+spec: 
+  type: NodePort 
+  selector: 
+    app: prometheus 
+    purpose: monitoring-demo 
+  ports: 
+  - name: promui 
+    protocol: TCP 
+    port: 9090 
+    targetPort: 9090 

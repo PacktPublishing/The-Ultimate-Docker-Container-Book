@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dotnet-api-deployment
+  labels:
+    app: dotnet-api
+    purpose: monitoring-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dotnet-api
+      purpose: monitoring-demo
+  template:
+    metadata:
+      labels:
+        app: dotnet-api
+        purpose: monitoring-demo
+    spec:
+      containers:
+      - name: dotnet-api
+        image: fundamentalsofdocker/ch18-dotnet-api:2.0
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: dotnet-api-svc
+spec:
+  type: NodePort
+  selector:
+    app: dotnet-api
+    purpose: monitoring-demo
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-api-deployment
+  labels:
+    app: node-api
+    purpose: monitoring-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-api
+      purpose: monitoring-demo
+  template:
+    metadata:
+      labels:
+        app: node-api
+        purpose: monitoring-demo
+    spec:
+      containers:
+      - name: node-api
+        image: fundamentalsofdocker/ch18-node-api:2.0
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: node-api-svc
+spec:
+  type: NodePort
+  selector:
+    app: node-api
+    purpose: monitoring-demo
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
