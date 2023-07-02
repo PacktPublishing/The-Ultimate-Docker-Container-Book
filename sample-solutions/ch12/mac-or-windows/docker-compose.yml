@@ -1,0 +1,36 @@
+version: "3.9"
+services:
+  app:
+    image: gnschenker/ch12-app
+    build: app
+    ports:
+      - 3000:3000
+    environment:
+      - "LOGGING_FILE=/usr/src/app/logs/app.log"
+    volumes:
+      - app_logs:/usr/src/app/logs
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.1-arm64
+    environment:
+      - "discovery.type=single-node"
+    ports:
+      - 9200:9200
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:7.17.1-arm64
+    depends_on:
+      - elasticsearch
+    volumes:
+      - app_logs:/usr/src/app/logs
+      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.1-arm64
+    depends_on:
+      - elasticsearch
+    ports:
+      - 5601:5601
+
+volumes:
+  app_logs:
