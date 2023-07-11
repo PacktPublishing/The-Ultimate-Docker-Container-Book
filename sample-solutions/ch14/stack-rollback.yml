@@ -1,0 +1,19 @@
+version: "3.8" 
+services: 
+  web: 
+    image: nginx:1.12-alpine 
+    ports: 
+    - 80:80 
+    deploy: 
+      replicas: 10 
+    update_config: 
+      parallelism: 2 
+      delay: 10s 
+      failure_action: rollback 
+      monitor: 10s 
+    healthcheck: 
+      test: ["CMD", "wget", "-qO", "-", http://localhost] 
+      interval: 2s 
+      timeout: 2s 
+      retries: 3 
+      start_period: 2s 

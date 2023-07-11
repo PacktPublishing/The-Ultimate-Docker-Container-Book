@@ -1,0 +1,12 @@
+version: "3.7" 
+
+services: 
+  whoami: 
+    image: nginx:1.12-alpine 
+    ports: 
+    - 81:80 
+    deploy: 
+      replicas: 10 
+      update_config: 
+        parallelism: 2 
+        delay: 10s 

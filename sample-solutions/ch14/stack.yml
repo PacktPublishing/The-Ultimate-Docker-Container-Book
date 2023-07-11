@@ -1,0 +1,20 @@
+version: "3.7" 
+services: 
+  whoami: 
+    image: training/whoami:latest 
+    networks: 
+    - test-net 
+    ports: 
+    - 81:8000 
+    deploy: 
+      replicas: 3 
+      update_config: 
+        parallelism: 2 
+        delay: 10s 
+      labels: 
+         app: sample-app 
+         environment: prod-south 
+
+networks: 
+  test-net: 
+    driver: overlay 

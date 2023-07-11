@@ -1,0 +1,24 @@
+version: "3.7" 
+services: 
+  web: 
+    image: fundamentalsofdocker/ch11-web:2.0 
+    networks: 
+    - pets-net 
+    ports: 
+    - 3000:3000 
+    deploy: 
+      replicas: 3 
+
+  db: 
+    image: fundamentalsofdocker/ch11-db:2.0 
+    networks: 
+    - pets-net 
+    volumes: 
+    - pets-data:/var/lib/postgresql/data 
+
+volumes: 
+  pets-data: 
+
+networks: 
+  pets-net: 
+    driver: overlay 
