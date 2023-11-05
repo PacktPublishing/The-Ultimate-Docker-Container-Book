@@ -40,7 +40,7 @@ services:
     container_name: filebeat
     user: root
     volumes:
-      - ./filebeat/filebeat.yaml:/usr/share/filebeat/filebeat.yaml
+      - ./filebeat/filebeat.yaml:/usr/share/filebeat/filebeat.yml
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
     depends_on:
