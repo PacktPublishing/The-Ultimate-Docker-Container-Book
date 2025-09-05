@@ -1,3 +1,6 @@
+
+<b><p align='center'>[![Packt Sale](https://static.packt-cdn.com/assets/images/humble+bundle/cloud_infrastructure_and_devops_toolkit_packt_books_Social.png)](https://www.humblebundle.com/books/cloud-infrastructure-and-devops-toolkit-packt-books?hmb_source=&hmb_medium=product_tile&hmb_campaign=mosaic_section_1_layout_index_1_layout_type_threes_tile_index_1_c_cloudinfrastructureanddevopstoolkitpackt_bookbundle)</p></b> 
+
 # The Ultimate Docker Container Book
 
 <a href="https://www.packtpub.com/product/the-ultimate-docker-container-book-third-edition/9781804613986?utm_source=github&utm_medium=repository&utm_campaign="><img src="https://content.packt.com/B19199/cover_image_small.jpg" alt="" height="256px" align="right"></a>
